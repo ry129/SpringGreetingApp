@@ -1,9 +1,11 @@
 package com.greetingapp.controller;
 
+import com.greetingapp.model.Greeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.greetingapp.Service.GreetingService;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -16,7 +18,11 @@ public class GreetController {
     }
     @GetMapping
     public Map<String, String> getGreeting(@RequestParam(required=false)String firstName,@RequestParam(required=false)String lastName) {
-        return  Map.of("message", greetingServices.getgreetingMessage(firstName,lastName));
+        return  Map.of("message", greetingServices.getGreetingMessage(firstName,lastName));
+    }
+    @GetMapping("/{id}")
+    public Optional<Greeting> getGreetingById(@PathVariable Long id) {
+        return greetingServices.getGreetingById(id);
     }
 
     @PostMapping
