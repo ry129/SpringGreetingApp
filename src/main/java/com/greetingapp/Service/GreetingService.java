@@ -1,6 +1,8 @@
 package com.greetingapp.Service;
 import com.greetingapp.model.Greeting;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 import com.greetingapp.repository.GreetingRepository;
 
@@ -27,11 +29,15 @@ public class GreetingService {
         }
 
         // Save to database
-        greetingRepository.save(new Greeting(message));
-        return message;
+       Greeting greeting = new Greeting();
+        Greeting savedGreeting = greetingRepository.save(greeting);
+        return "Saved Id : " + savedGreeting.getID();
     }
 
     public Optional<Greeting> getGreetingById(Long id) {
         return greetingRepository.findById(id);
+    }
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }

@@ -4,6 +4,8 @@ import com.greetingapp.model.Greeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.greetingapp.Service.GreetingService;
+
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,6 +25,10 @@ public class GreetController {
     @GetMapping("/{id}")
     public Optional<Greeting> getGreetingById(@PathVariable Long id) {
         return greetingServices.getGreetingById(id);
+    }
+    @GetMapping("/all")
+    public List<Greeting> getAllGreetings() {
+        return greetingServices.getAllGreetings();
     }
 
     @PostMapping
