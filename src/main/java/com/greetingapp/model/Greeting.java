@@ -15,9 +15,7 @@ public class Greeting {
     public long getID() {
         return ID;
     }
-    public void setID(long ID) {
-        this.ID = ID;
-    }
+
     public String getMessage() {
         return message;
     }

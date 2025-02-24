@@ -29,15 +29,13 @@ public class GreetingService {
         }
 
         // Save to database
-       Greeting greeting = new Greeting();
-        Greeting savedGreeting = greetingRepository.save(greeting);
-        return "Saved Id : " + savedGreeting.getID();
+
+        greetingRepository.save( new Greeting(message));
+        return message;
     }
 
     public Optional<Greeting> getGreetingById(Long id) {
         return greetingRepository.findById(id);
     }
-    public List<Greeting> getAllGreetings() {
-        return greetingRepository.findAll();
-    }
+
 }
