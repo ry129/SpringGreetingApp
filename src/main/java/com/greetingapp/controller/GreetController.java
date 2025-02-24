@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping("/greeting")
 public class GreetController {
     private final GreetingService greetingServices;
-    @Autowired
+
     public GreetController(GreetingService greetingServices) {
         this.greetingServices = greetingServices;
     }
@@ -25,10 +25,6 @@ public class GreetController {
     @GetMapping("/{id}")
     public Optional<Greeting> getGreetingById(@PathVariable Long id) {
         return greetingServices.getGreetingById(id);
-    }
-    @GetMapping("/all")
-    public List<Greeting> getAllGreetings() {
-        return greetingServices.getAllGreetings();
     }
 
     @PostMapping
