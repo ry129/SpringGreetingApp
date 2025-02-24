@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import com.greetingapp.Service.GreetingService;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetController {
@@ -14,8 +15,8 @@ public class GreetController {
         this.greetingServices = greetingServices;
     }
     @GetMapping
-    public Map<String, String> getGreeting() {
-        return  Map.of("message", greetingServices.getgreeting());
+    public Map<String, String> getGreeting(@RequestParam(required=false)String firstName,@RequestParam(required=false)String lastName) {
+        return  Map.of("message", greetingServices.getgreetingMessage(firstName,lastName));
     }
 
     @PostMapping
