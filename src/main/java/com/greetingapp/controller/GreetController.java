@@ -1,15 +1,21 @@
 package com.greetingapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import com.greetingapp.Service.GreetingService;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetController {
+    private final GreetingService greetingServices;
+    @Autowired
+    public GreetController(GreetingService greetingServices) {
+        this.greetingServices = greetingServices;
+    }
     @GetMapping
     public Map<String, String> getGreeting() {
-        return  Map.of("message", "Hello GET Request!");
+        return  Map.of("message", greetingServices.getgreeting());
     }
 
     @PostMapping
