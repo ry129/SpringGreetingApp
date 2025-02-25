@@ -31,14 +31,9 @@ public class GreetController {
         return greetingServices.getGreetingById(id);
     }
 
-    @GetMapping("/all")
-    public List<Greeting> getAllGreetings() {
+    @GetMapping("/getall")
+    public List<Greeting> getAllGreeting() {
         return greetingServices.getAllGreetings();
-    }
-
-    @PutMapping("/{id}")
-    public Optional<Greeting> updateGreeting(@PathVariable Long id, @RequestBody Map<String, String> request){
-        return greetingServices.updateGreeting(id, request.get("message"));
     }
 
     @PostMapping
@@ -51,8 +46,9 @@ public class GreetController {
         return Map.of("message", "Hello PUT Request!", "data", body.get("name"));
     }
 
-    @DeleteMapping
-    public Map<String, String> deleteGreeting() {
-        return Map.of("message", "Hello, DELETE Request!");
+    @DeleteMapping("/{id}")
+    public Map<String, String> deleteGreetings(@PathVariable Long id) {
+        greetingServices.deleteGreeting(id);
+        return Map.of("message", "Deleted Greeting with id: " + id + " deleted successfully.");
     }
 }

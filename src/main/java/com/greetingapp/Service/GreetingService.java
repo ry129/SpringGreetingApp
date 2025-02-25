@@ -44,10 +44,13 @@ public class GreetingService {
         return greetingRepository.findAll();
     }
 
-    public Optional<Greeting> updateGreeting(Long id, String newMessage){
-        return greetingRepository.findById(id).map(greeting -> {
-            greeting.setMessage(newMessage);
-            return greetingRepository.save(greeting);
-        });
+    public void deleteGreeting(Long id){
+        Optional<Greeting> existinggreeting = greetingRepository.findById(id);
+        if (existinggreeting.isPresent()) {
+            greetingRepository.deleteById(id);
+        }
+        else{
+            throw new RuntimeException("greeting with id : " + id + "not found.");
+        }
     }
 }
