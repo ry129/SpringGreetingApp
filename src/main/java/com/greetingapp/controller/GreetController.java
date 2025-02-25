@@ -1,3 +1,4 @@
+
 package com.greetingapp.controller;
 
 import com.greetingapp.model.Greeting;
@@ -9,22 +10,35 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/greeting")
 public class GreetController {
     private final GreetingService greetingServices;
 
+    @Autowired
     public GreetController(GreetingService greetingServices) {
         this.greetingServices = greetingServices;
     }
+
     @GetMapping
-    public Map<String, String> getGreeting(@RequestParam(required=false)String firstName,@RequestParam(required=false)String lastName) {
-        return  Map.of("message", greetingServices.getGreetingMessage(firstName,lastName));
+    public Map<String, String> getGreeting(@RequestParam(required = false) String firstName,@RequestParam(required = false) String lastName) {
+        return  Map.of("message", greetingServices.getGreetingMessage(firstName, lastName));
     }
+
+    // Taking id from the user
     @GetMapping("/{id}")
     public Optional<Greeting> getGreetingById(@PathVariable Long id) {
         return greetingServices.getGreetingById(id);
+    }
+
+    @GetMapping("/all")
+    public List<Greeting> getAllGreetings() {
+        return greetingServices.getAllGreetings();
+    }
+
+    @PutMapping("/{id}")
+    public Optional<Greeting> updateGreeting(@PathVariable Long id, @RequestBody Map<String, String> request){
+        return greetingServices.updateGreeting(id, request.get("message"));
     }
 
     @PostMapping
